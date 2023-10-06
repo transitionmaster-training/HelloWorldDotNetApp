@@ -13,6 +13,7 @@ pipeline {
             steps {
                 // Restore the NuGet packages
                 bat '''dotnet restore HelloWorldConsoleApp.csproj'''
+                bat '''dir'''
             }
         }
         
@@ -20,6 +21,7 @@ pipeline {
             steps {
                   // Build the .NET project
                 bat 'dotnet msbuild HelloWorldConsoleApp.csproj'
+                 bat '''dir'''
             }
         }
         
