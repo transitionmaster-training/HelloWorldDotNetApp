@@ -5,14 +5,14 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Check out the source code from your repository
-                git 'https://github.com/harshalschaudhari/HelloWorldConsoleApp.git'
+                git branch: 'main', url: 'https://github.com/transitionmaster-training/HelloWorldDotNetApp.git'
             }
         }
  
         stage('RestoreNuget') {
             steps {
                 // Restore the NuGet packages
-                bat '''C:/ProgramData/chocolatey/bin/nuget.exe restore HelloWorldConsoleApp.csproj'''
+                bat '''dotnet restore HelloWorldConsoleApp.csproj'''
             }
         }
         
@@ -20,7 +20,16 @@ pipeline {
             steps {
                   // Build the .NET project
                 bat 'dotnet msbuild HelloWorldConsoleApp.csproj'
+            }
+        }
+        
+        stage('ExecuteProject') {
+            steps {
+                  // Build the .NET project
+                 bat '''cd bin\\Debug\\net6.0
 
+HelloWorldConsoleApp.exe'''
+                  
             }
         }
     }
